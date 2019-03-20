@@ -1,0 +1,10 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Auth
+GET     /               											controllers.AuthController.index
+GET     /authenticate             		  							controllers.AuthController.authenticate
+GET 	/isauthenticated											controllers.AuthController.isAuthenticated
+GET 	/userdata													controllers.AuthController.getUserData
+GET 	/unauthenticate												controllers.AuthController.unauthenticate

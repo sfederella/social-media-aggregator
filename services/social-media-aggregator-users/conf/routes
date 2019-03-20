@@ -1,0 +1,30 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Users
+GET 	/																controllers.UserController.index
+GET 	/users															controllers.UserController.listAll
+GET 	/users/current													controllers.UserController.getCurrent
+GET 	/users/:username												controllers.UserController.find(username: String)
+
+# Boards
+GET 	/users/:username/boards					   						controllers.BoardController.listAll(username: String)
+POST 	/users/:username/boards  										controllers.BoardController.add(username: String)
+GET 	/users/:username/boards/:boardname				 				controllers.BoardController.find(username: String, boardname: String)
+DELETE 	/users/:username/boards/:boardname				 				controllers.BoardController.delete(username: String, boardname: String)
+PUT 	/users/:username/boards/:boardname				 				controllers.BoardController.edit(username: String, boardname: String)
+POST	/users/:username/boards/:boardname/userfollowings				controllers.BoardController.followUser(username: String, boardname: String)
+DELETE	/users/:username/boards/:boardname/userfollowings/:twUsername	controllers.BoardController.unfollowUser(username: String, boardname: String, twUsername: String)
+POST	/users/:username/boards/:boardname/subjectfollowings			controllers.BoardController.followSubject(username: String, boardname: String)
+DELETE	/users/:username/boards/:boardname/subjectfollowings/:subject 	controllers.BoardController.unfollowSubject(username: String, boardname: String, subject: String)
+
+# TwitterUsers
+GET		/twitterusers													controllers.TwitterUserController.search(query: Option[String])
+
+
+### NoDocs ###
+GET   /docs/swagger-ui/*file        controllers.Assets.at(path:String="/public/lib/swagger-ui", file:String)
+
+### NoDocs ###
+GET   /assets/*file                 controllers.Assets.versioned(path="/public", file: Asset)
