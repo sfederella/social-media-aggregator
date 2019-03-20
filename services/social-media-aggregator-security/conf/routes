@@ -3,8 +3,16 @@
 # ~~~~
 
 # Auth
-GET     /               											controllers.AuthController.index
-GET     /authenticate             		  							controllers.AuthController.authenticate
-GET 	/isauthenticated											controllers.AuthController.isAuthenticated
-GET 	/userdata													controllers.AuthController.getUserData
-GET 	/unauthenticate												controllers.AuthController.unauthenticate
+GET     /               						controllers.AuthController.index
+GET     /authenticate             		  		controllers.AuthController.authenticate
+GET 	/isauthenticated						controllers.AuthController.isAuthenticated
+GET 	/userdata								controllers.AuthController.getUserData
+GET 	/unauthenticate							controllers.AuthController.unauthenticate
+
+
+### NoDocs ###
+GET	  	/swagger								controllers.AuthController.swagger
+### NoDocs ###
+GET   	/docs/swagger-ui/*file        			controllers.Assets.at(path:String="/public/lib/swagger-ui", file:String)
+### NoDocs ###
+GET   	/assets/*file                 			controllers.Assets.versioned(path="/public", file: Asset)

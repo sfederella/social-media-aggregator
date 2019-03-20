@@ -12,3 +12,11 @@ POST 	/followings										controllers.FollowableController.add
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+
+### NoDocs ###
+GET	  	/swagger								controllers.PostController.swagger
+### NoDocs ###
+GET   	/docs/swagger-ui/*file        			controllers.Assets.at(path:String="/public/lib/swagger-ui", file:String)
+### NoDocs ###
+GET   	/assets/*file                 			controllers.Assets.versioned(path="/public", file: Asset)

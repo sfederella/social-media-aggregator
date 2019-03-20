@@ -39,8 +39,13 @@ class AuthController @Inject()(cc: ControllerComponents, config: Configuration)(
   
   def index = Action {
     Ok(Json.obj(
-        "message" -> "Welcome to the Securityyy API"
+        "message" -> "Welcome to the Security API",
+        "links" -> Json.arr(Json.obj("swagger" -> s"${config.get[String]("microservices.self")}/swagger"))
     ))
+  }
+  
+  def swagger = Action {
+    Redirect("/docs/swagger-ui/index.html?url=/assets/swagger.json")
   }
   
   def authenticate = Action { implicit request: Request[AnyContent] =>

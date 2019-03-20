@@ -27,20 +27,26 @@ import services.PostService
 import actors.Listen
 import play.api.libs.json.JsObject
 import play.api.libs.json.JsString
+import play.api.Configuration
 
 @Singleton
-class PostController @Inject()(cc: ControllerComponents, actorSystem: ActorSystem, postService: PostService)(implicit ec: ExecutionContext)
-  extends AbstractController(cc) {
+class PostController @Inject()(cc: ControllerComponents, actorSystem: ActorSystem, postService: PostService, config: Configuration)
+  (implicit ec: ExecutionContext) extends AbstractController(cc) {
   
 	private val (out, channel) = Concurrent.broadcast[JsValue]
 	private val source: Source[JsValue,_] = Source.fromPublisher(IterateeStreams.enumeratorToPublisher(out))
 	val sseListener = actorSystem.actorOf(Props[SSEListener], "sseListener")
 	sseListener ! Listen(channel)
   
-	def index = Action {
+  def index = Action {
     Ok(Json.obj(
-        "message" -> "Welcome to the Posts API"
+        "message" -> "Welcome to the Posts API",
+        "links" -> Json.arr(Json.obj("swagger" -> s"${config.get[String]("microservices.self")}/swagger"))
     ))
+  }
+	
+	def swagger = Action {
+    Redirect("/docs/swagger-ui/index.html?url=/assets/swagger.json")
   }
   
   def search = Action.async { implicit request =>
