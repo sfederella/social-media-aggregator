@@ -26,7 +26,7 @@ Start the services with the script ``run-all.bat`` or start them individually:
 
 ### Step 3
 
-Start the client with ``yarn start"`` and after loading it will start running in the browser automatically.
+Start the client with ``yarn start`` and after loading it will start running in the browser automatically.
 
 ## Documentation
 
