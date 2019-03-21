@@ -24,7 +24,7 @@ Start the services with the script ``run-all.bat`` or start them individually:
 2. social-media-aggregator-users: ``sbt "run 9001"``
 3. social-media-aggregator-posts: ``sbt "run 9002"``
 
-### Step 3
+#### Step 3
 
 Start the client with ``yarn start`` and after loading it will start running in the browser automatically.
 
