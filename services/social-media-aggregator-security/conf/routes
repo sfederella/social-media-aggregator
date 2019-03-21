@@ -3,10 +3,63 @@
 # ~~~~
 
 # Auth
+
+###
+#  summary: Welcome message.
+#  tags:
+#    - Welcome
+#  responses:
+#    200:
+#      description: success
+###
 GET     /               						controllers.AuthController.index
+
+###
+#  summary: Authenticate. This does all the work for getting the access tokens for Twitter. It is not consumable as an API.
+#  tags:
+#    - Authentication
+#  responses:
+#    303:
+#      description: redirect
+###
 GET     /authenticate             		  		controllers.AuthController.authenticate
+
+###
+#  summary: Checks the tokens sent in the session cookie and determines if they are valid.
+#  tags:
+#    - With session
+#  responses:
+#    200:
+#      description: success
+#    401:
+#      description: invalid tokens
+#    403:
+#      description: missing tokens
+###
 GET 	/isauthenticated						controllers.AuthController.isAuthenticated
+
+###
+#  summary: Checks the tokens sent in the session cookie and returns the user data.
+#  tags:
+#    - With session
+#  responses:
+#    200:
+#      description: success
+#    401:
+#      description: invalid tokens
+#    403:
+#      description: missing tokens
+###
 GET 	/userdata								controllers.AuthController.getUserData
+
+###
+#  summary: Unauthenticate. Removes the cookie session.
+#  tags:
+#    - Authentication
+#  responses:
+#    303:
+#      description: redirect
+###
 GET 	/unauthenticate							controllers.AuthController.unauthenticate
 
 

@@ -3,15 +3,62 @@
 # ~~~~
 
 # Posts
+
+###
+#  summary: Welcome message.
+#  tags:
+#    - Welcome
+#  responses:
+#    200:
+#      description: success
+###
 GET 	/   											controllers.PostController.index
+
+###
+#  summary: Search posts within the search parameters.
+#  tags:
+#    - Posts
+#  parameters:
+#    - name: body
+#      schema:
+#        $ref: '#/definitions/models.SearchRequest'
+#  responses:
+#    200:
+#      description: success
+#      schema:
+#        type: array 
+#        items: 
+#          $ref: '#/definitions/models.PostJsRepresentation'
+#    400:
+#      description: bad request
+###
 POST 	/posts/search   								controllers.PostController.search
+
+###
+#  summary: Streams posts broadcasting via SSE.
+#  tags:
+#    - Streams
+#    - Posts
+#  responses:
+#    200:
+#      description: success
+###
 GET 	/posts/stream									controllers.PostController.stream
 
-# Followables
-POST 	/followings										controllers.FollowableController.add
 
-# Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+# Followables
+
+###
+#  summary: Add new followings for the background feed task
+#  tags:
+#    - Followings
+#  responses:
+#    201:
+#      description: successfully created
+#    400:
+#      description: bad request
+###
+POST 	/followings										controllers.FollowableController.add
 
 
 ### NoDocs ###

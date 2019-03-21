@@ -6,3 +6,5 @@ consumes:
   - application/json
 produces: 
   - application/json
+host: 127.0.0.1:9001
+basePath: 127.0.0.1:9001

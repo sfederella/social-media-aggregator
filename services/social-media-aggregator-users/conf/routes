@@ -3,23 +3,235 @@
 # ~~~~
 
 # Users
+
+###
+#  summary: Welcome message.
+#  tags:
+#    - Welcome
+#  responses:
+#    200:
+#      description: success
+###
 GET 	/																controllers.UserController.index
+
+###
+#  summary: Get all application users.
+#  tags:
+#    - Users
+#  responses:
+#    200:
+#      description: success
+#      schema:
+#        type: array 
+#        items: 
+#          $ref: '#/definitions/models.AppUser'
+###
 GET 	/users															controllers.UserController.listAll
+
+###
+#  summary: Get current session user.
+#  tags:
+#    - Users
+#    - With session
+#  responses:
+#    200:
+#      description: success
+#      schema:
+#        $ref: '#/definitions/models.AppUser'
+#    401:
+#      description: invalid tokens
+#    403:
+#      description: missing tokens
+###
 GET 	/users/current													controllers.UserController.getCurrent
+
+###
+#  summary: Find application user by username.
+#  tags:
+#    - Users
+#  responses:
+#    200:
+#      description: success
+#      schema:
+#        $ref: '#/definitions/models.AppUser'
+###
 GET 	/users/:username												controllers.UserController.find(username: String)
 
 # Boards
+
+###
+#  summary: Get all boards from user.
+#  tags:
+#    - Boards
+#  responses:
+#    200:
+#      description: success
+#      schema:
+#        type: array 
+#        items: 
+#          $ref: '#/definitions/models.Board'
+###
 GET 	/users/:username/boards					   						controllers.BoardController.listAll(username: String)
+
+###
+#  summary: Create a new board.
+#  tags:
+#    - Boards
+#    - With session
+#  parameters:
+#    - name: body
+#      schema:
+#        type: string
+#  responses:
+#    201:
+#      description: successfully created
+#    400:
+#      description: bad request
+#    401:
+#      description: invalid tokens
+#    403:
+#      description: missing tokens
+###
 POST 	/users/:username/boards  										controllers.BoardController.add(username: String)
+
+###
+#  summary: Find board by name.
+#  tags:
+#    - Boards
+#  responses:
+#    200:
+#      description: success
+#      schema:
+#        $ref: '#/definitions/models.Board'
+###
 GET 	/users/:username/boards/:boardname				 				controllers.BoardController.find(username: String, boardname: String)
+
+###
+#  summary: Delete a board.
+#  tags:
+#    - Boards
+#    - With session
+#  responses:
+#    200:
+#      description: success
+#    401:
+#      description: invalid tokens
+#    403:
+#      description: missing tokens
+###
 DELETE 	/users/:username/boards/:boardname				 				controllers.BoardController.delete(username: String, boardname: String)
+
+###
+#  summary: Update a board.
+#  tags:
+#    - Boards
+#    - With session
+#  parameters:
+#    - name: body
+#      schema:
+#        type: string
+#  responses:
+#    200:
+#      description: success
+#    400:
+#      description: bad request
+#    401:
+#      description: invalid tokens
+#    403:
+#      description: missing tokens
+###
 PUT 	/users/:username/boards/:boardname				 				controllers.BoardController.edit(username: String, boardname: String)
+
+###
+#  summary: Follow an user.
+#  tags:
+#    - Boards
+#    - With session
+#  parameters:
+#    - name: body
+#      schema:
+#        $ref: '#/definitions/models.TwitterUser'
+#  responses:
+#    201:
+#      description: successfully created
+#    400:
+#      description: bad request
+#    401:
+#      description: invalid tokens
+#    403:
+#      description: missing tokens
+###
 POST	/users/:username/boards/:boardname/userfollowings				controllers.BoardController.followUser(username: String, boardname: String)
+
+###
+#  summary: Unfollow an user.
+#  tags:
+#    - Boards
+#    - With session
+#  responses:
+#    200:
+#      description: success
+#    401:
+#      description: invalid tokens
+#    403:
+#      description: missing tokens
+###
 DELETE	/users/:username/boards/:boardname/userfollowings/:twUsername	controllers.BoardController.unfollowUser(username: String, boardname: String, twUsername: String)
+
+###
+#  summary: Follow a subject.
+#  tags:
+#    - Boards
+#    - With session
+#  parameters:
+#    - name: body
+#      schema:
+#        type: string
+#  responses:
+#    201:
+#      description: successfully created
+#    400:
+#      description: bad request
+#    401:
+#      description: invalid tokens
+#    403:
+#      description: missing tokens
+###
 POST	/users/:username/boards/:boardname/subjectfollowings			controllers.BoardController.followSubject(username: String, boardname: String)
+
+###
+#  summary: Unfollow a subject.
+#  tags:
+#    - Boards
+#    - With session
+#  responses:
+#    200:
+#      description: success
+#    401:
+#      description: invalid tokens
+#    403:
+#      description: missing tokens
+###
 DELETE	/users/:username/boards/:boardname/subjectfollowings/:subject 	controllers.BoardController.unfollowSubject(username: String, boardname: String, subject: String)
 
 # TwitterUsers
+
+###
+#  summary: Get all boards from user.
+#  tags:
+#    - Boards
+#  parameters:
+#    - name: query
+#      schema:
+#        type: string
+#  responses:
+#    200:
+#      description: success
+#      schema:
+#        type: array 
+#        items: 
+#          $ref: '#/definitions/models.TwitterUser'
+###
 GET		/twitterusers													controllers.TwitterUserController.search(query: Option[String])
 
 
