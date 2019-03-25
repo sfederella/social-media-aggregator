@@ -9,7 +9,7 @@ swaggerDomainNameSpaces := Seq("models")
 scalaVersion := "2.12.8"
 
 libraryDependencies += guice
-libraryDependencies += "org.reactivemongo" %% "play2-reactivemongo" % "0.16.2-play27"
+libraryDependencies += "org.reactivemongo" %% "play2-reactivemongo" % "0.16.5-play26"
 libraryDependencies += "com.danielasfregola" %% "twitter4s" % "5.3"
 libraryDependencies += specs2 % Test
 libraryDependencies += ws
