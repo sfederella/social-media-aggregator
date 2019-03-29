@@ -78,6 +78,7 @@ class AuthController @Inject()(cc: ControllerComponents, config: Configuration)(
         val restClient = TwitterRestClient(consumerToken, accessToken)
         restClient.verifyCredentials(false,false,false)
           .map { ratedData => callback(ratedData) }
+          .recover { case _ => Unauthorized("Invalid credentials") }
       }
       case _ => Future(Forbidden("Missing session"))
     }
